@@ -1,3 +1,4 @@
+using DG.DOTweenEditor;
 using HonestMistake.Interactable.CarPieces;
 using UnityEditor;
 using UnityEngine;
@@ -9,15 +10,12 @@ namespace HonestMistake.Editor
     {
         public override void OnInspectorGUI()
         {
-            //base.OnInspectorGUI();
-            if (GUILayout.Button("Test collect"))
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Preview animation"))
             {
-                (target as CarPieceKeeper)?.OnInteracted();
-            }
-            
-            if (GUILayout.Button("Reset collect"))
-            {
-                (target as CarPieceKeeper)?.DebugResetCollect();
+                var tween = (target as CarPieceKeeper)?.CreateCollectTween();
+                DOTweenEditorPreview.PrepareTweenForPreview(tween);
+                DOTweenEditorPreview.Start();
             }
         }
     }
