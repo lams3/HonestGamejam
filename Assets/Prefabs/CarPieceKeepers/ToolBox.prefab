@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceToCollect: {fileID: 1217854140024499050}
+  animDuration: 1.5
+  finalHeight: 1
+  punch: {x: 20, y: 20, z: 20}
 --- !u!1001 &1218686688125225611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4234172212373120, guid: 176033ae75eaf924c9e6bdd3849a3ed6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.19
+      value: -0.18999958
       objectReference: {fileID: 0}
     - target: {fileID: 4234172212373120, guid: 176033ae75eaf924c9e6bdd3849a3ed6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -220,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4234172212373120, guid: 176033ae75eaf924c9e6bdd3849a3ed6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.116
+      value: 0.116000175
       objectReference: {fileID: 0}
     - target: {fileID: 4234172212373120, guid: 176033ae75eaf924c9e6bdd3849a3ed6, type: 3}
       propertyPath: m_LocalRotation.w
