@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using HonestMistake.Interactable;
 using UnityEngine;
@@ -18,6 +19,18 @@ namespace HonestMistake.CarPiece
         private Vector3 originalPos;
         private Vector3 originalScale;
         private Quaternion originalRot;
+
+        private void Awake()
+        {
+            CacheTransform();
+        }
+
+        private void CacheTransform()
+        {
+            originalPos = pieceToCollect.position;
+            originalRot = pieceToCollect.rotation;
+            originalScale = pieceToCollect.localScale;
+        }
 #endif
         
         public void OnInteracted()
@@ -42,7 +55,7 @@ namespace HonestMistake.CarPiece
             seq.Play().OnComplete(() => pieceToCollect.gameObject.SetActive(false));
         }
 
-        public Sequence CreateCollectTween()
+        public Sequence CreateCollectTween(bool resetOnEnd = false)
         {
             Vector3 finalMovePos = pieceToCollect.position + Vector3.up * finalHeight;
             
@@ -54,16 +67,28 @@ namespace HonestMistake.CarPiece
             seq.Insert(animDuration / 2, pieceToCollect.DOScale(0, animDuration / 2));
 
 #if UNITY_EDITOR
-            originalPos = pieceToCollect.position;
-            originalRot = pieceToCollect.rotation;
-            originalScale = pieceToCollect.localScale;
-
-            seq.Insert(animDuration, pieceToCollect.DOMove(originalPos, 0));
-            seq.Insert(animDuration, pieceToCollect.DOScale(originalScale, 0));
-            seq.Insert(animDuration, pieceToCollect.DORotateQuaternion(originalRot, 0));
+            if (resetOnEnd)
+            {
+                CacheTransform();
+                seq.Insert(animDuration, pieceToCollect.DOMove(originalPos, 0));
+                seq.Insert(animDuration, pieceToCollect.DOScale(originalScale, 0));
+                seq.Insert(animDuration, pieceToCollect.DORotateQuaternion(originalRot, 0));   
+            }
 #endif
 
             return seq;
         }
+
+#if UNITY_EDITOR
+        public void ResetCollect()
+        {
+            pieceToCollect.gameObject.SetActive(true);
+            pieceToCollect.position = originalPos;
+            pieceToCollect.localScale = originalScale;
+            pieceToCollect.rotation = originalRot;
+            
+            CarPieceInventoryManager.Instance.ResetGotItem(carPieceEnum);
+        }
+#endif
     }
 }

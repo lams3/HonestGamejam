@@ -22,6 +22,14 @@ namespace HonestMistake.CarPiece
         {
             return inventory.All(i => i.Value);
         }
+
+#if UNITY_EDITOR
+        public void ResetGotItem(CarPieceEnum item)
+        {
+            inventory[item] = true;
+            view.ResetGotItem(item);
+        }  
+#endif
     }
 
     public enum CarPieceEnum

@@ -31,5 +31,29 @@ namespace HonestMistake.CarPiece.UI
                     break;
             }
         }
+
+#if UNITY_EDITOR
+        public void ResetGotItem(CarPieceEnum item)
+        {
+            switch (item)
+            {
+                case CarPieceEnum.WHEEL:
+                    itemWheel.ResetAnimateGotItem();
+                    break;
+                case CarPieceEnum.GAS:
+                    itemGas.ResetAnimateGotItem();
+                    break;
+                case CarPieceEnum.ELECTRIC:
+                    itemElectric.ResetAnimateGotItem();
+                    break;
+                case CarPieceEnum.TIRE:
+                    itemTire.ResetAnimateGotItem();
+                    break;
+                case CarPieceEnum.WRENCH:
+                    itemWrench.ResetAnimateGotItem();
+                    break;
+            }
+        }  
+#endif
     }
 }
