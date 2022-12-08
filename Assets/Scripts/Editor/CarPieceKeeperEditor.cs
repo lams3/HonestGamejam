@@ -1,5 +1,5 @@
 using DG.DOTweenEditor;
-using HonestMistake.Interactable.CarPieces;
+using HonestMistake.CarPiece;
 using UnityEditor;
 using UnityEngine;
 

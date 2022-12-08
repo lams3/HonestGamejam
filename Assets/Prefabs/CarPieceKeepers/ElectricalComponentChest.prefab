@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceToCollect: {fileID: 8662781293407546327}
+  carPieceEnum: 2
   animDuration: 2
   finalHeight: 1
   punch: {x: 20, y: 20, z: 20}

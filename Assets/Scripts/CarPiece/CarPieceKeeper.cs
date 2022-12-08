@@ -1,12 +1,14 @@
 using DG.Tweening;
+using HonestMistake.Interactable;
 using UnityEngine;
 
-namespace HonestMistake.Interactable.CarPieces
+namespace HonestMistake.CarPiece
 {
     public class CarPieceKeeper : MonoBehaviour, IInteractableHandler
     {
         [SerializeField] private Transform pieceToCollect;
-
+        [SerializeField] private CarPieceEnum carPieceEnum;
+        
         [Header("Animation")] 
         [SerializeField] private float animDuration = 1;
         [SerializeField] private float finalHeight;
@@ -31,7 +33,7 @@ namespace HonestMistake.Interactable.CarPieces
 
         private void AddPieceToInventory()
         {
-            //TODO: add collected item to inventory service
+            CarPieceInventoryManager.Instance.GotItem(carPieceEnum);
         }
 
         private void PlayCollectAnimation()
