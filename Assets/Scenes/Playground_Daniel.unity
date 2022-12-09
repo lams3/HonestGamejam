@@ -190,46 +190,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScarecrowZombie
       objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.327335
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.177326
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.5074556
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.5307264
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.85790527
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.50480145
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.07271492
-      objectReference: {fileID: 0}
-    - target: {fileID: 5380828939971789034, guid: b118ed1f2cf0943488ae72bee764bb44,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.062343057
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b118ed1f2cf0943488ae72bee764bb44, type: 3}
 --- !u!1 &277804265
