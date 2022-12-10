@@ -1,11 +1,10 @@
-using System;
 using DG.Tweening;
 using HonestMistake.Interactable;
 using UnityEngine;
 
 namespace HonestMistake.CarPiece
 {
-    public class CarPieceKeeper : MonoBehaviour, IInteractableHandler
+    public class CarPieceKeeper : InteractableBase 
     {
         [SerializeField] private Transform pieceToCollect;
         [SerializeField] private CarPieceEnum carPieceEnum;
@@ -33,8 +32,9 @@ namespace HonestMistake.CarPiece
         }
 #endif
         
-        public void OnInteracted()
+        public override void OnInteracted()
         {
+            base.OnInteracted();
             Collect();
         }
         
