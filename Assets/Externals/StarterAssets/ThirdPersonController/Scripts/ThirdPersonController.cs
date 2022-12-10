@@ -20,13 +20,19 @@ namespace StarterAssets
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
+        
+        [Tooltip("Crouch speed of the character in m/s")]
+        public float CrouchSpeed = 1.5f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
 
-        [Tooltip("Acceleration and deceleration")]
-        public float SpeedChangeRate = 10.0f;
+        public float Acceleration = 10.0f;
+        public float Deacceleration = 10.0f;
+        
+        public float CrouchAcceleration = 2.0f;
+        public float CrouchDeacceleration = 10.0f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -97,6 +103,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDCrouching;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -173,6 +180,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDCrouching = Animator.StringToHash("Crouch");
         }
 
         private void GroundedCheck()
@@ -214,7 +222,21 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = MoveSpeed;
+            float acceleration = Acceleration;
+            float deacceleration = Deacceleration;
+            if (_input.sprint)
+            {
+                _animator.SetBool(_animIDCrouching, false);
+                targetSpeed = SprintSpeed;
+            }
+            else
+            {
+                _animator.SetBool(_animIDCrouching, _input.crouch);
+                targetSpeed = _input.crouch ? CrouchSpeed : targetSpeed;
+                acceleration = _input.crouch ? CrouchAcceleration : acceleration;
+                deacceleration = _input.crouch ? CrouchDeacceleration : deacceleration;
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -228,16 +250,14 @@ namespace StarterAssets
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-            // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
+            if (currentHorizontalSpeed < targetSpeed - speedOffset)
             {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * SpeedChangeRate);
-
-                // round speed to 3 decimal places
+                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * acceleration);
+                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            } 
+            else if(currentHorizontalSpeed > targetSpeed + speedOffset)
+            {
+                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * deacceleration);
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
             else
@@ -245,7 +265,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * acceleration);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
