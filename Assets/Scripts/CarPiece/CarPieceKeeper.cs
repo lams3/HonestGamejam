@@ -1,11 +1,10 @@
-using System;
 using DG.Tweening;
 using HonestMistake.Interactable;
 using UnityEngine;
 
 namespace HonestMistake.CarPiece
 {
-    public class CarPieceKeeper : MonoBehaviour, IInteractableHandler
+    public class CarPieceKeeper : InteractableBase 
     {
         [SerializeField] private Transform pieceToCollect;
         [SerializeField] private CarPieceEnum carPieceEnum;
@@ -33,8 +32,9 @@ namespace HonestMistake.CarPiece
         }
 #endif
         
-        public void OnInteracted()
+        public override void Interact()
         {
+            base.Interact();
             Collect();
         }
         
@@ -55,7 +55,7 @@ namespace HonestMistake.CarPiece
             seq.Play().OnComplete(() => pieceToCollect.gameObject.SetActive(false));
         }
 
-        public Sequence CreateCollectTween(bool resetOnEnd = false)
+        public Sequence CreateCollectTween()
         {
             Vector3 finalMovePos = pieceToCollect.position + Vector3.up * finalHeight;
             
@@ -67,13 +67,10 @@ namespace HonestMistake.CarPiece
             seq.Insert(animDuration / 2, pieceToCollect.DOScale(0, animDuration / 2));
 
 #if UNITY_EDITOR
-            if (resetOnEnd)
-            {
-                CacheTransform();
-                seq.Insert(animDuration, pieceToCollect.DOMove(originalPos, 0));
-                seq.Insert(animDuration, pieceToCollect.DOScale(originalScale, 0));
-                seq.Insert(animDuration, pieceToCollect.DORotateQuaternion(originalRot, 0));   
-            }
+            CacheTransform();
+            seq.Insert(animDuration, pieceToCollect.DOMove(originalPos, 0));
+            seq.Insert(animDuration, pieceToCollect.DOScale(originalScale, 0));
+            seq.Insert(animDuration, pieceToCollect.DORotateQuaternion(originalRot, 0));   
 #endif
 
             return seq;

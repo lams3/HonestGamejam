@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 5503927492595351507}
   - component: {fileID: 5483950346432794313}
   - component: {fileID: 5493516475335302425}
-  - component: {fileID: 5514504412349509653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Prop_Chest_Wood_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5514504412349509653
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5506640226999372511}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1233008, y: 0.30838504, z: 0.8320355}
-  m_Center: {x: -0.0000002682209, y: 0.10873829, z: 0.37777397}
 --- !u!1 &5506990128288218603
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,9 +96,9 @@ GameObject:
   - component: {fileID: 5493812634744669645}
   - component: {fileID: 5514637457273103605}
   - component: {fileID: 5764861671711773417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ElectricalComponentChest
-  m_TagString: Untagged
+  m_TagString: CarPieceKeeper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +117,7 @@ Transform:
   m_Children:
   - {fileID: 5503927492595351507}
   - {fileID: 8662781293407546327}
+  - {fileID: 1223327161206204530}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,8 +182,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1647449, y: 0.468608, z: 0.8101473}
-  m_Center: {x: -0.00000032782555, y: 0.234304, z: -0.00000047683716}
+  m_Size: {x: 1.1, y: 0.7, z: 0.9}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!114 &5764861671711773417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,11 +196,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7469455dbcd447495e2daa681b6474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactHint: {fileID: 8673740629050032017}
   pieceToCollect: {fileID: 8662781293407546327}
   carPieceEnum: 2
   animDuration: 2
   finalHeight: 1
   punch: {x: 20, y: 20, z: 20}
+--- !u!1001 &329731669310246271
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5511930737074930473}
+    m_Modifications:
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992597814412931822, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_Name
+      value: InteractHint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992597814412931822, guid: 2c8bc6e0bfa1443fc857665979afa219,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c8bc6e0bfa1443fc857665979afa219, type: 3}
+--- !u!4 &1223327161206204530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1470795429819409677, guid: 2c8bc6e0bfa1443fc857665979afa219,
+    type: 3}
+  m_PrefabInstance: {fileID: 329731669310246271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8673740629050032017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8992597814412931822, guid: 2c8bc6e0bfa1443fc857665979afa219,
+    type: 3}
+  m_PrefabInstance: {fileID: 329731669310246271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8658454882816815945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,6 +298,10 @@ PrefabInstance:
     - target: {fileID: 1067415987515788, guid: 9416e0d5aaea2e443a9a7cc74f4ab771, type: 3}
       propertyPath: m_Name
       value: SM_Icon_Micro_Chip_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1067415987515788, guid: 9416e0d5aaea2e443a9a7cc74f4ab771, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4894368812914846, guid: 9416e0d5aaea2e443a9a7cc74f4ab771, type: 3}
       propertyPath: m_RootOrder

@@ -14,7 +14,7 @@ namespace HonestMistake.Editor
             GUILayout.Label("Editor Testing");
             if (GUILayout.Button("Preview animation"))
             {
-                var tween = (target as CarPieceKeeper)?.CreateCollectTween(true);
+                var tween = (target as CarPieceKeeper)?.CreateCollectTween();
                 DOTweenEditorPreview.PrepareTweenForPreview(tween);
                 DOTweenEditorPreview.Start();
             }
@@ -26,7 +26,7 @@ namespace HonestMistake.Editor
             {
                 if(!Application.isPlaying) Debug.LogError("You need to be in playmode to test this!");
                 
-                (target as CarPieceKeeper)?.OnInteracted();
+                (target as CarPieceKeeper)?.Interact();
             }
             
             if (GUILayout.Button("Reset Collect"))
