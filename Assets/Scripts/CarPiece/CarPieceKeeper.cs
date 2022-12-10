@@ -32,9 +32,9 @@ namespace HonestMistake.CarPiece
         }
 #endif
         
-        public override void OnInteracted()
+        public override void Interact()
         {
-            base.OnInteracted();
+            base.Interact();
             Collect();
         }
         

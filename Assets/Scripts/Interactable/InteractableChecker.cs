@@ -1,4 +1,5 @@
 using System;
+using StarterAssets;
 using UnityEngine;
 
 namespace HonestMistake.Interactable
@@ -8,6 +9,8 @@ namespace HonestMistake.Interactable
         [SerializeField] private Transform raycastOrigin;
         [SerializeField] private float maxDist;
         [SerializeField] private LayerMask checkMask;
+
+        [SerializeField] private StarterAssetsInputs _input;
 
         private InteractableBase gazingInteractable;
 
@@ -23,19 +26,44 @@ namespace HonestMistake.Interactable
             if(Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, maxDist, checkMask))
             {
                 var interactable = hit.collider.GetComponent<InteractableBase>();
-                if (interactable && interactable != gazingInteractable)
+                if (interactable)
                 {
-                    FoundInteractable(interactable);
+                    if (interactable != gazingInteractable)
+                    {
+                        FoundInteractable(interactable);
+                    }
                 }
                 else
                 {
-                    if (!gazingInteractable) 
-                        return;
-                    
-                    gazingInteractable.AbandonedByChecker();
-                    gazingInteractable = null;
+                    ClearFoundInteractable();
                 }
             }
+            else
+            {
+                ClearFoundInteractable();
+            }
+
+            CheckInteractInput();
+        }
+
+        private void CheckInteractInput()
+        {
+            if (_input.interact)
+            {
+                if (gazingInteractable != null)
+                {
+                    gazingInteractable.Interact();   
+                }
+            }
+        }
+
+        private void ClearFoundInteractable()
+        {
+            if (!gazingInteractable) 
+                return;
+                    
+            gazingInteractable.AbandonedByChecker();
+            gazingInteractable = null;
         }
 
         private void FoundInteractable(InteractableBase foundInteractable)

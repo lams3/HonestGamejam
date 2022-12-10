@@ -26,7 +26,7 @@ namespace HonestMistake.Editor
             {
                 if(!Application.isPlaying) Debug.LogError("You need to be in playmode to test this!");
                 
-                (target as CarPieceKeeper)?.OnInteracted();
+                (target as CarPieceKeeper)?.Interact();
             }
             
             if (GUILayout.Button("Reset Collect"))

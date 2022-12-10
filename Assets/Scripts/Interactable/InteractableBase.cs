@@ -26,7 +26,7 @@ namespace HonestMistake.Interactable
             interactHint.SetActive(false);
         }
 
-        public override void OnInteracted()
+        public override void Interact()
         {
             wasEverInteracted = true;
             interactHint.SetActive(false);
