@@ -14,7 +14,7 @@ namespace HonestMistake.Editor
             GUILayout.Label("Editor Testing");
             if (GUILayout.Button("Preview animation"))
             {
-                var tween = (target as CarPieceKeeper)?.CreateCollectTween();
+                var tween = (target as CarPieceKeeper)?.CreateCollectTween(true);
                 DOTweenEditorPreview.PrepareTweenForPreview(tween);
                 DOTweenEditorPreview.Start();
             }
