@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017673ccbd55c904ea7aa66c7ee81e02, type: 3}
+  m_Name: ZombieChasing
+  m_EditorClassIdentifier: 
+  viewingDistanceStanding: 20
+  viewingDistanceCrouching: 20
+  fieldOfView: 179
+  outOfSightTransition: {fileID: 11400000, guid: 9412a8a4e94ccbe4b8c2c096b6577404,
+    type: 2}
