@@ -1,4 +1,5 @@
 using System;
+using HonestMistake.Note;
 using StarterAssets;
 using UnityEngine;
 
@@ -13,15 +14,27 @@ namespace HonestMistake.Interactable
         [SerializeField] private StarterAssetsInputs _input;
 
         private InteractableBase gazingInteractable;
-
+        private bool isInCooldown;
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(raycastOrigin.position, raycastOrigin.position + raycastOrigin.forward * maxDist);
         }
 
+        private void Start()
+        {
+            NoteManager.Instance.OnNoteClosed -= TriggerCooldown;
+            NoteManager.Instance.OnNoteClosed += TriggerCooldown;
+        }
+
         private void Update()
         {
+            if (isInCooldown)
+            {
+                return;
+            }
+            
             RaycastHit hit;
             if(Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, maxDist, checkMask))
             {
@@ -70,6 +83,22 @@ namespace HonestMistake.Interactable
         {
             gazingInteractable = foundInteractable;
             foundInteractable.SpottedByChecker();
+        }
+        
+        public void TriggerCooldown()
+        {
+            isInCooldown = true;
+            Invoke(nameof(ClearCooldown), 0.2f);
+        }
+
+        private void ClearCooldown()
+        {
+            isInCooldown = false;
+        }
+
+        private void OnDestroy()
+        {
+            NoteManager.Instance.OnNoteClosed -= TriggerCooldown;
         }
     }
 }

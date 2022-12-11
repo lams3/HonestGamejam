@@ -10,6 +10,8 @@ namespace HonestMistake.Note
     {
         [SerializeField] private Canvas canvas;
         [SerializeField] private TextMeshProUGUI contentText;
+
+        public Action OnNoteClosed;
         
         private StarterAssetsInputs _inputs;
         private bool isNoteOpen;
@@ -38,8 +40,9 @@ namespace HonestMistake.Note
         private void CloseNote()
         {
             canvas.gameObject.SetActive(false);
-            _inputs.StopListeningToInteract(OnInteracted);
+            _inputs.StopListeningToInteract();
             Time.timeScale = 1;
+            OnNoteClosed?.Invoke();
         }
     }
 }
