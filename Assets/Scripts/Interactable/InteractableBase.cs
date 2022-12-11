@@ -4,13 +4,15 @@ namespace HonestMistake.Interactable
 {
     public class InteractableBase : Interactable
     {
+        [Header("Interactable Base")]
         [SerializeField] private GameObject interactHint;
-
-        private bool wasEverInteracted = false;
+        [SerializeField] private bool isRepeatable;
+        
+        private bool wasEverInteracted;
         
         public void SpottedByChecker()
         {
-            if (!wasEverInteracted)
+            if (!wasEverInteracted || isRepeatable)
             {
                 interactHint.SetActive(true);
             }

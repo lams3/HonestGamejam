@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -21,6 +22,8 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+
+		private Action<bool> interactListener;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -57,7 +60,6 @@ namespace StarterAssets
 		}
 #endif
 
-
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -86,6 +88,7 @@ namespace StarterAssets
 		public void InteractInput(bool newInteractState)
 		{
 			interact = newInteractState;
+			interactListener?.Invoke(newInteractState);
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
@@ -97,6 +100,17 @@ namespace StarterAssets
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
+
+#region Listeners
+		public void SetInteractListener(Action<bool> callback)
+		{
+			interactListener = callback;
+		}
+
+		public void StopListeningToInteract(Action<bool> callback)
+		{
+			interactListener = null;
+		}
+#endregion
 	}
-	
 }
