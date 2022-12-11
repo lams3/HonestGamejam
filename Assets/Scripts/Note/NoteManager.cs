@@ -44,5 +44,10 @@ namespace HonestMistake.Note
             Time.timeScale = 1;
             OnNoteClosed?.Invoke();
         }
+
+        public void SetFont(TMP_FontAsset font)
+        {
+            contentText.font = font;
+        }
     }
 }

@@ -107,7 +107,7 @@ namespace StarterAssets
 			interactListener = callback;
 		}
 
-		public void StopListeningToInteract(Action<bool> callback)
+		public void StopListeningToInteract()
 		{
 			interactListener = null;
 		}

@@ -95,10 +95,5 @@ namespace HonestMistake.Interactable
         {
             isInCooldown = false;
         }
-
-        private void OnDestroy()
-        {
-            NoteManager.Instance.OnNoteClosed -= TriggerCooldown;
-        }
     }
 }

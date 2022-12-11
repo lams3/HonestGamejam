@@ -1,5 +1,6 @@
 using System;
 using HonestMistake.Interactable;
+using TMPro;
 using UnityEngine;
 
 namespace HonestMistake.Note
@@ -9,6 +10,7 @@ namespace HonestMistake.Note
         [Header("Note")] 
         [TextArea] 
         [SerializeField] private string content;
+        [SerializeField] private TMP_FontAsset font;
 
         public override void Interact()
         {
@@ -18,6 +20,7 @@ namespace HonestMistake.Note
 
         private void OpenNote()
         {
+            NoteManager.Instance.SetFont(font);
             NoteManager.Instance.DisplayNote(content);
         }
     }
