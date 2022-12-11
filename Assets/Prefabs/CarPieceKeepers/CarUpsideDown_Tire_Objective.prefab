@@ -189,8 +189,7 @@ MonoBehaviour:
   pieceToCollect: {fileID: 1939350276985016584}
   carPieceEnum: 3
   animDuration: 1.5
-  finalHeight: 2.5
-  punch: {x: 20, y: 20, z: 20}
+  finalHeight: 2
 --- !u!65 &7311288224768907946
 BoxCollider:
   m_ObjectHideFlags: 0
