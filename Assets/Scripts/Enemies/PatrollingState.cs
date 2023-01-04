@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using HonestMistake.Utils;
+
 
 namespace HonestMistake.Enemies
 {
@@ -54,23 +56,8 @@ namespace HonestMistake.Enemies
 
             float viewingDistance = Detectable.Instance.crouching ? viewingDistanceCrouching : viewingDistanceStanding;
 
-            Mesh mesh = new Mesh();
-            mesh.vertices = new Vector3[3]
-            {
-                caller.EyeTransform.position,
-                caller.EyeTransform.position + Quaternion.Euler(0.0f, -fieldOfView / 2.0f, 0.0f) * caller.EyeTransform.forward * viewingDistance,
-                caller.EyeTransform.position + Quaternion.Euler(0.0f, fieldOfView / 2.0f, 0.0f) * caller.EyeTransform.forward * viewingDistance,
-            };
-            mesh.normals = new Vector3[3]
-            {
-                Vector3.up,
-                Vector3.up,
-                Vector3.up
-            };
-            mesh.triangles = new int[3] { 0, 1, 2};
-
             Gizmos.color = new Color(1.0f, 1.0f, 0.0f, 0.3f);
-            Gizmos.DrawMesh(mesh);
+            GizmosExtensions.DrawWireArc(caller.EyeTransform.position, caller.EyeTransform.forward, fieldOfView, viewingDistance);
         }
     }
 }

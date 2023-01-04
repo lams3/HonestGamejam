@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HonestMistake.Utils;
+using UnityEngine;
 
 namespace HonestMistake.Enemies
 {
@@ -57,6 +58,16 @@ namespace HonestMistake.Enemies
         {
             caller.WarningIcon.SetActive(false);
             caller.StateStorage.Remove(this);
+        }
+
+        public override void OnDrawGizmosSelected(Enemy caller)
+        {
+            base.OnDrawGizmosSelected(caller);
+
+            float viewingDistance = Detectable.Instance.crouching ? viewingDistanceCrouching : viewingDistanceStanding;
+
+            Gizmos.color = new Color(1.0f, 0.3f, 0.0f, 0.3f);
+            GizmosExtensions.DrawWireArc(caller.EyeTransform.position, caller.EyeTransform.forward, fieldOfView, viewingDistance);
         }
     }
 }
