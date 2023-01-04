@@ -16,6 +16,7 @@ MonoBehaviour:
   viewingDistanceCrouching: 7.5
   fieldOfView: 120
   targetSpottingError: 2
+  animatorTriggerName: TriggerIdle
   seeNothingTransition: {fileID: 11400000, guid: 3b976b49955a9d24a9aa7c9be00b107f,
     type: 2}
   seeSomethingTransition: {fileID: 11400000, guid: 02ba4ca20fd5a3f49bc039542e1577f1,

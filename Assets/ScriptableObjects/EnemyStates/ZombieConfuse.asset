@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f45b504f6045640a7cbdb241e82505, type: 3}
   m_Name: ZombieConfuse
   m_EditorClassIdentifier: 
-  timeout: 2
-  timeToSee: 0.5
+  timeout: 3
+  timeToSee: 1.5
   viewingDistanceStanding: 12
   viewingDistanceCrouching: 5
   fieldOfView: 90
+  animatorTriggerName: TriggerConfuse
   seeSomethingTransition: {fileID: 11400000, guid: 9412a8a4e94ccbe4b8c2c096b6577404,
     type: 2}
   timeoutTransition: {fileID: 11400000, guid: f2f37f6bca0ec5044a99a0f61ba17a8b, type: 2}

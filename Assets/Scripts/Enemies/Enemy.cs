@@ -1,5 +1,6 @@
 ﻿using HonestMistake.Utils;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +14,7 @@ namespace HonestMistake.Enemies
 
         private Dictionary<State<Enemy>, object> stateStorage = new Dictionary<State<Enemy>, object>();
 
+        public Animator Animator => animator;
         public Transform EyeTransform => eyeTransform;
         public GameObject WarningIcon => warningIcon;
         public Dictionary<State<Enemy>, object> StateStorage => stateStorage;
@@ -34,14 +36,14 @@ namespace HonestMistake.Enemies
 
         private void Update()
         {
-            animator.SetFloat("MotionSpeed", 1.0f);
             animator.SetFloat("Speed", agent.velocity.magnitude);
-            
+
             var prevState = state;
             state = state.Execute(this);
             if (prevState != state)
             {
                 prevState.OnStateExit(this);
+                ResetTriggers();
                 state.OnStateEnter(this);
             }
         }
@@ -51,11 +53,28 @@ namespace HonestMistake.Enemies
             state.OnDrawGizmosSelected(this);
         }
 
+        public void LookAt(Vector3 target)
+        {
+            var toTarget = target - transform.position;
+            transform.forward = Vector3.ProjectOnPlane(toTarget, Vector3.up).normalized;
+        }
+
         public void SetDestination(Vector3 target, float error = 0.0f)
         {
             Vector2 randomInCircle = Random.insideUnitCircle;
             Vector3 offset = error * new Vector3(randomInCircle.x, 0.0f, randomInCircle.y);
             agent.SetDestination(target + offset);
+        }
+
+        public void Stop()
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+
+        public bool DestinationReached()
+        {
+            return agent.DestinationReached();
         }
 
         public bool CanSee(Detectable detectable, float viewingDistance, float fieldOfView)
@@ -71,15 +90,10 @@ namespace HonestMistake.Enemies
             return targetInSight;
         }
 
-        public void Stop()
+        private void ResetTriggers()
         {
-            agent.isStopped = true;
-            agent.ResetPath();
-        }
-
-        public bool DestinationReached()
-        {
-            return agent.DestinationReached();
+            foreach (var trigger in animator.parameters.Where(el => el.type == AnimatorControllerParameterType.Trigger))
+                animator.ResetTrigger(trigger.nameHash);
         }
 
         private void OnFootstep()

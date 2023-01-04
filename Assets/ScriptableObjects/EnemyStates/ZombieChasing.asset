@@ -15,5 +15,6 @@ MonoBehaviour:
   viewingDistanceStanding: 20
   viewingDistanceCrouching: 20
   fieldOfView: 179
+  animatorTriggerName: TriggerIdle
   outOfSightTransition: {fileID: 11400000, guid: 9412a8a4e94ccbe4b8c2c096b6577404,
     type: 2}

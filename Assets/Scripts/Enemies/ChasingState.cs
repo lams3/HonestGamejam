@@ -7,11 +7,14 @@ namespace HonestMistake.Enemies
     {
         [SerializeField] private float viewingDistanceStanding = 20.0f;
         [SerializeField] private float viewingDistanceCrouching = 20.0f;
-        [SerializeField] private float fieldOfView = 179.0f;
+        [SerializeField] private float fieldOfView = 160.0f;
+        [SerializeField] private string animatorTriggerName = string.Empty;
         [SerializeField] private State<Enemy> outOfSightTransition;
 
         public override void OnStateEnter(Enemy caller)
         {
+            caller.WarningIcon.SetActive(true);
+            caller.Animator.SetTrigger(animatorTriggerName);
         }
 
         public override State<Enemy> Execute(Enemy caller)
@@ -28,6 +31,8 @@ namespace HonestMistake.Enemies
 
         public override void OnStateExit(Enemy caller)
         {
+            caller.WarningIcon.SetActive(false);
+        }
         }
     }
 }

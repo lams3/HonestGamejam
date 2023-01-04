@@ -10,6 +10,7 @@ namespace HonestMistake.Enemies
         [SerializeField] private float viewingDistanceStanding = 12.0f;
         [SerializeField] private float viewingDistanceCrouching = 5.0f;
         [SerializeField] private float fieldOfView = 90.0f;
+        [SerializeField] private string animatorTriggerName = string.Empty;
         [SerializeField] private State<Enemy> seeSomethingTransition;
         [SerializeField] private State<Enemy> timeoutTransition;
 
@@ -24,14 +25,14 @@ namespace HonestMistake.Enemies
             caller.StateStorage[this] = new InstanceVariables
             {
                 startTime = Time.time,
-                timeInSight = 0.0f
+                timeInSight = 0.0f,
             };
 
-            caller.WarningIcon.SetActive(true);
             caller.Stop();
             
-            var callerToTarget = Detectable.Instance.transform.position - caller.transform.position;
-            caller.transform.forward = Vector3.ProjectOnPlane(callerToTarget, Vector3.up).normalized;
+            caller.WarningIcon.SetActive(true);
+            caller.LookAt(Detectable.Instance.transform.position);
+            caller.Animator.SetTrigger(animatorTriggerName);
         }
 
         public override State<Enemy> Execute(Enemy caller)

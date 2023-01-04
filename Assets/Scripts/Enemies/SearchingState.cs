@@ -10,6 +10,7 @@ namespace HonestMistake.Enemies
         [SerializeField] private float viewingDistanceCrouching = 7.5f;
         [SerializeField] private float fieldOfView = 120.0f;
         [SerializeField] private float targetSpottingError = 2.0f;
+        [SerializeField] private string animatorTriggerName = string.Empty;
         [SerializeField] private State<Enemy> seeNothingTransition;
         [SerializeField] private State<Enemy> seeSomethingTransition;
 
@@ -17,6 +18,7 @@ namespace HonestMistake.Enemies
         {
             caller.WarningIcon.SetActive(true);
             caller.SetDestination(caller.transform.position, targetSpottingError);
+            caller.Animator.SetTrigger(animatorTriggerName);
         }
 
         public override State<Enemy> Execute(Enemy caller)
